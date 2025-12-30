@@ -1,0 +1,25 @@
+{
+  "name": "portfolioexperiencev3",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "lucide-react": "^0.562.0",
+    "react-dom": "^19.2.3",
+    "react": "^19.2.3",
+    "clsx": "^2.1.1",
+    "gsap": "^3.14.2",
+    "tailwind-merge": "^3.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.19.3",
+    "@vitejs/plugin-react": "^5.1.2",
+    "typescript": "~5.9.3",
+    "vite": "^7.3.0"
+  }
+}
