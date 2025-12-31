@@ -1,6 +1,4 @@
-import { useState } from 'react';
-import { ChevronDown, Briefcase } from 'lucide-react';
-import { cn } from '../utils';
+import { Briefcase } from 'lucide-react';
 
 const experiences = [
   {
@@ -54,8 +52,6 @@ const experiences = [
 ];
 
 export const Experience = () => {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
-
   return (
     <section className="py-24 bg-white px-6">
       <div className="max-w-4xl mx-auto">
@@ -66,32 +62,31 @@ export const Experience = () => {
           <h2 className="text-2xl font-bold tracking-tight text-neutral-900">Work History</h2>
         </div>
 
-        <div className="flex flex-col">
+        <div className="flex flex-col gap-8">
           {experiences.map((exp, i) => (
             <div 
               key={i} 
-              className="border-b border-neutral-100 last:border-0"
+              className="group relative pl-8 md:pl-0"
             >
-              <button 
-                onClick={() => setOpenIndex(openIndex === i ? null : i)}
-                className="w-full py-6 flex flex-col md:flex-row md:items-center justify-between gap-4 text-left group hover:bg-neutral-50/50 transition-colors px-2 rounded-lg"
-              >
-                <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-6">
-                  <span className="font-mono text-xs text-neutral-400 uppercase w-32 shrink-0">{exp.period}</span>
-                  <h3 className="text-lg font-medium text-neutral-900 group-hover:text-blue-600 transition-colors">
+              {/* Timeline Line (Desktop) */}
+              <div className="hidden md:block absolute left-[145px] top-2 bottom-0 w-px bg-neutral-100 group-last:hidden" />
+              <div className="hidden md:block absolute left-[141px] top-2 w-2 h-2 rounded-full bg-neutral-200 group-hover:bg-blue-600 transition-colors" />
+
+              {/* Timeline Line (Mobile) */}
+              <div className="md:hidden absolute left-0 top-2 bottom-0 w-px bg-neutral-100 group-last:hidden" />
+              <div className="md:hidden absolute left-[-3.5px] top-2 w-2 h-2 rounded-full bg-neutral-200 group-hover:bg-blue-600 transition-colors" />
+
+              <div className="flex flex-col md:flex-row md:gap-12">
+                <span className="font-mono text-xs text-neutral-400 uppercase w-32 shrink-0 pt-1 mb-2 md:mb-0">{exp.period}</span>
+                
+                <div className="flex-grow">
+                  <h3 className="text-lg font-medium text-neutral-900 mb-1 group-hover:text-blue-600 transition-colors">
                     {exp.role} <span className="text-neutral-400 font-normal">at {exp.company}</span>
                   </h3>
+                  <p className="text-neutral-500 leading-relaxed text-sm max-w-xl">
+                    {exp.desc}
+                  </p>
                 </div>
-                <ChevronDown className={cn("w-5 h-5 text-neutral-400 transition-transform duration-300", openIndex === i ? "rotate-180" : "")} />
-              </button>
-              
-              <div className={cn(
-                "overflow-hidden transition-all duration-300 ease-in-out px-2 md:pl-40",
-                openIndex === i ? "max-h-40 opacity-100 pb-6" : "max-h-0 opacity-0"
-              )}>
-                <p className="text-neutral-500 leading-relaxed text-sm md:text-base max-w-xl">
-                  {exp.desc}
-                </p>
               </div>
             </div>
           ))}

@@ -7,32 +7,32 @@ gsap.registerPlugin(ScrollTrigger);
 
 const services = [
   {
-    title: "Creative Development",
-    desc: "Crafting visually captivating and user-centric experiences that enhance user engagement using React, Tailwind, and GSAP.",
+    title: "SaaS Development",
+    desc: "Building end-to-end applications with Next.js, focusing on performance and real user needs.",
     icon: Palette,
     color: "text-rose-600",
     bg: "group-hover:bg-rose-50"
   },
   {
-    title: "Back-end Development",
-    desc: "Building reliable and secure systems with Node, ASP.NET, and PostgreSQL ensuring seamless data flow.",
-    icon: Server,
-    color: "text-emerald-600",
-    bg: "group-hover:bg-emerald-50"
-  },
-  {
-    title: "Cloud Solutions",
-    desc: "Architecting CI/CD pipelines and managing cloud infrastructure on Azure with automation and security in mind.",
+    title: "Cloud & DevOps",
+    desc: "Setting up reliable AWS environments, Docker containers, and CI/CD pipelines to keep things running smoothly.",
     icon: Cloud,
     color: "text-blue-600",
     bg: "group-hover:bg-blue-50"
   },
   {
-    title: "Unity Development",
-    desc: "Creating state-of-the-art VR/AR applications and immersive simulations using Unity Engine and C#.",
+    title: "AI Integration",
+    desc: "Implementing LLMs (Anthropic/OpenAI) to build agents that can actually reason and automate tasks.",
     icon: Glasses,
     color: "text-purple-600",
     bg: "group-hover:bg-purple-50"
+  },
+  {
+    title: "Microservices",
+    desc: "Writing efficient backend services in Go or Python to handle complex logic and routing.",
+    icon: Server,
+    color: "text-emerald-600",
+    bg: "group-hover:bg-emerald-50"
   }
 ];
 

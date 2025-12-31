@@ -1,7 +1,7 @@
 import React, { useLayoutEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Terminal, Cpu, Database, Network, ArrowRight } from 'lucide-react';
+import { Terminal, Database, Network, ArrowRight } from 'lucide-react';
 import { cn } from '../utils';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -100,9 +100,8 @@ export const ProcessTicker = () => {
           
           {/* 1 */}
           <div className="flex items-center gap-6 shrink-0 relative">
-            <TextSegment>I architect</TextSegment>
-            <HighlightWord color="text-indigo-600">Intelligent</HighlightWord>
-            <TextSegment>ecosystems</TextSegment>
+            <TextSegment>I build robust</TextSegment>
+            <HighlightWord color="text-indigo-600">Cloud Systems</HighlightWord>
             <div className="popup-element mx-8 p-6 bg-indigo-50 rounded-full border border-indigo-100 shadow-xl">
               <Network className="w-16 h-16 text-indigo-600" />
             </div>
@@ -110,39 +109,22 @@ export const ProcessTicker = () => {
 
           {/* 2 */}
           <div className="flex items-center gap-6 shrink-0 relative ml-20">
-            <TextSegment>where</TextSegment>
+            <TextSegment>integrating</TextSegment>
             <div className="popup-element relative mx-10">
               <div className="absolute inset-0 bg-blue-500 blur-2xl opacity-10 animate-pulse" />
               <Terminal className="w-24 h-24 text-blue-600 drop-shadow-2xl" />
             </div>
-            <HighlightWord color="text-blue-600">Logic</HighlightWord>
-            <TextSegment>meets</TextSegment>
+            <HighlightWord color="text-blue-600">Frontier AI Agents</HighlightWord>
           </div>
 
           {/* 3 */}
           <div className="flex items-center gap-6 shrink-0 relative ml-20">
-            <TextSegment>limitless</TextSegment>
+            <TextSegment>delivered through</TextSegment>
              <div className="popup-element mx-10 p-6 bg-emerald-50 rounded-2xl border border-emerald-100 shadow-xl rotate-6">
               <Database className="w-16 h-16 text-emerald-600" />
             </div>
-            <HighlightWord color="text-emerald-600">Scale</HighlightWord>
-          </div>
-
-          {/* 4 */}
-          <div className="flex items-center gap-6 shrink-0 relative ml-20">
-             <TextSegment>to create</TextSegment>
-             <div className="w-48 h-2 bg-neutral-200 shrink-0 mx-8 rounded-full" />
-             <TextSegment className="font-serif italic text-neutral-400">unforgettable</TextSegment>
-          </div>
-
-          {/* 5 */}
-          <div className="flex items-center gap-6 shrink-0 relative ml-20">
-             <div className="popup-element mx-10">
-                <Cpu className="w-32 h-32 text-amber-500 stroke-[1]" />
-             </div>
-             <TextSegment>digital</TextSegment>
-             <HighlightWord color="text-amber-500">Realities</HighlightWord>
-             <TextSegment>.</TextSegment>
+            <HighlightWord color="text-emerald-600">Polished UX</HighlightWord>
+            <TextSegment>.</TextSegment>
           </div>
 
           <div className="w-[30vw] shrink-0" />

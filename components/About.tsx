@@ -56,11 +56,12 @@ export const About = () => {
         {/* Right Col - Bio & Tech */}
         <div className="md:col-span-8 flex flex-col justify-center">
           <div className="prose prose-lg prose-neutral max-w-none mb-12">
+            <h3 className="text-3xl font-bold text-neutral-900 mb-6">I build complex systems that feel simple.</h3>
             <p className="about-text text-xl md:text-2xl font-light leading-relaxed text-neutral-800">
-              I'm <strong className="font-semibold text-black">Ashref</strong>, a developer specializing in creating stunning experiences using .NET, React, and Unity Engine. My diverse skill set allows me to bridge the gap between high-performance backends and immersive front-ends.
+              I'm <strong className="font-semibold text-black">Ashref</strong>. I'm a software engineer who cares about the whole product, from the database to the pixel. I've built cybersecurity agents that dynamically provision Kali Linux containers in the cloud, and document processing systems that handle real-world workloads.
             </p>
             <p className="about-text text-lg text-neutral-500 mt-6 leading-relaxed">
-              As a certified Azure Cloud professional with a background in game development, I leverage a unique blend of skills to craft applications that are not only functional but visually compelling. Whether it's a dynamic web app or a VR training module, my goal is to innovate and deliver excellence.
+              I use <strong className="font-medium text-neutral-900">Go</strong> for high-performance microservices, <strong className="font-medium text-neutral-900">AWS</strong> for scalable infrastructure, and <strong className="font-medium text-neutral-900">Next.js</strong> because I believe even complex internal tools should have a great user experience. I also have deep experience tuning AI agents using prompt engineering and A/B testing to ensure reliability. I bridge the gap between heavy backend logic and the person using it.
             </p>
           </div>
 
