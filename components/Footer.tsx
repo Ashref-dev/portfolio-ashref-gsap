@@ -48,7 +48,7 @@ export const Footer = () => {
   return (
     <footer 
       ref={containerRef} 
-      className='relative h-full bg-neutral-950 flex flex-col items-center justify-between py-24 px-6 overflow-hidden'
+      className='relative h-full bg-neutral-900 flex flex-col items-center justify-between py-24 px-6 overflow-hidden'
       style={{ clipPath: "polygon(0% 0, 100% 0%, 100% 100%, 0 100%)" }}
     >
       {/* Background Text */}

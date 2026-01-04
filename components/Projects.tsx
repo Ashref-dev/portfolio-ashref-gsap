@@ -88,7 +88,7 @@ export const Projects = () => {
   return (
     <section
       ref={containerRef}
-      className="relative w-full h-screen overflow-hidden bg-white z-10 pt-24 md:pt-32 scroll-mt-24 md:scroll-mt-32"
+      className="relative w-full h-screen overflow-hidden bg-[#fafafa] z-10 pt-24 md:pt-32 scroll-mt-24 md:scroll-mt-32"
       id="work"
     >
       <div className="absolute top-24 left-12 z-20 pointer-events-none md:top-32 md:left-16 !-z-10">

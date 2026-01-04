@@ -28,7 +28,7 @@ export const HoverPill = ({
       {/* Text Label */}
       <span
         className={cn(
-          'font-serif italic text-[1em] leading-none px-1 relative',
+          'font-serif italic text-[1.05em] leading-none px-1 relative',
           colorClass
         )}
       >

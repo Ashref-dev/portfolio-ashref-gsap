@@ -12,7 +12,7 @@ import { Footer } from "./components/Footer";
 
 export default function App() {
   return (
-    <div className="bg-neutral-950 min-h-screen">
+    <div className="bg-neutral-900 min-h-screen">
       <style>{`
         :root {
           --font-serif: 'Instrument Serif', serif;
@@ -31,7 +31,7 @@ export default function App() {
       <Header />
 
       {/* Main Content Wrapper - Slides over the footer */}
-      <main className="relative z-10 bg-white shadow-2xl mb-[85vh]">
+      <main className="relative z-10 bg-[#fafafa] shadow-2xl mb-[85vh]">
         {/* 1. Hero Manifesto (Clean Intro) */}
         <HeroManifesto />
 

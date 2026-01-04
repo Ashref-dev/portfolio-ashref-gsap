@@ -2,11 +2,11 @@ import { useRef, useLayoutEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
-  HoverSlider,
-  HoverSliderImage,
-  HoverSliderImageWrap,
-  TextStaggerHover,
-  useHoverSliderContext,
+    HoverSlider,
+    HoverSliderImage,
+    HoverSliderImageWrap,
+    TextStaggerHover,
+    useHoverSliderContext,
 } from "./ui/animated-slideshow";
 import { motion } from "motion/react";
 
@@ -93,7 +93,7 @@ export const Services = () => {
   return (
     <section
       ref={containerRef}
-      className="relative py-32 bg-white px-6"
+      className="relative py-32 bg-[#fafafa] px-6"
       id="services"
     >
       <div className="max-w-7xl mx-auto">

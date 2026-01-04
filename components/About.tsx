@@ -64,7 +64,7 @@ export const About = () => {
   const techs = ["Python", "Go", "Next.js", "AWS", "Azure", "Docker", "PostgreSQL", "AI Agents", "Unity", "Three.js"];
 
   return (
-    <section ref={containerRef} className="relative py-24 bg-white px-6 border-b border-neutral-100 overflow-hidden" id="about">
+    <section ref={containerRef} className="relative py-24 bg-[#fafafa] px-6 border-b border-neutral-100 overflow-hidden" id="about">
       <div className="max-w-7xl mx-auto">
         
         {/* Top Section: Compact Bio */}
@@ -107,8 +107,8 @@ export const About = () => {
 
         {/* Bottom Section: Tech Stack Ticker */}
         <div className="tech-ticker overflow-hidden relative">
-          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-white to-transparent z-10" />
-          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-white to-transparent z-10" />
+          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#fafafa] to-transparent z-10" />
+          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#fafafa] to-transparent z-10" />
           
           <div className="flex whitespace-nowrap animate-ticker hover:[animation-play-state:paused]">
             {[...techs, ...techs, ...techs].map((tech, i) => (

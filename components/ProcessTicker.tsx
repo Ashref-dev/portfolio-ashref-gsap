@@ -119,9 +119,9 @@ export const ProcessTicker = () => {
   return (
     <section
       ref={containerRef}
-      className="relative w-full h-screen overflow-hidden bg-white z-30 border-t border-neutral-100"
+      className="relative w-full h-screen overflow-hidden bg-[#fafafa] z-30 border-t border-neutral-100"
     >
-      <div className="w-full h-full flex items-center bg-white">
+      <div className="w-full h-full flex items-center bg-[#fafafa]">
         <div
           ref={trackRef}
           className="flex flex-nowrap items-center px-[5vw] w-max gap-12"

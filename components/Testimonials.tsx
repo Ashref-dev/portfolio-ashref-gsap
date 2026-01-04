@@ -92,7 +92,7 @@ export const Testimonials = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative h-screen bg-white overflow-hidden flex flex-col justify-center">
+    <section ref={sectionRef} className="relative h-screen bg-[#fafafa] overflow-hidden flex flex-col justify-center">
       
       {/* Background Grid Lines (Subtle Architectural Feel) */}
       <div className="absolute inset-0 w-full h-full pointer-events-none">
@@ -125,7 +125,7 @@ export const Testimonials = () => {
             key={i} 
             className="relative w-[80vw] md:w-[40vw] h-full shrink-0 group"
           >
-            <div className="w-full h-full bg-neutral-50 border border-neutral-100 p-8 md:p-12 flex flex-col justify-between transition-colors duration-500 hover:bg-white hover:shadow-xl hover:shadow-neutral-100/50 hover:border-neutral-200">
+            <div className="w-full h-full bg-neutral-50 border border-neutral-100 p-8 md:p-12 flex flex-col justify-between transition-colors duration-500 hover:bg-[#fafafa] hover:shadow-xl hover:shadow-neutral-100/50 hover:border-neutral-200">
               
               {/* Top: Quote Icon & ID */}
               <div className="flex justify-between items-start">

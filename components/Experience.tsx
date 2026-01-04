@@ -149,7 +149,7 @@ export const Experience = () => {
   return (
     <section
       ref={containerRef}
-      className="relative py-32 bg-white px-6 overflow-hidden"
+      className="relative py-32 bg-[#fafafa] px-6 overflow-hidden"
       id="experience"
       onMouseLeave={() => setActiveImage(null)}
     >

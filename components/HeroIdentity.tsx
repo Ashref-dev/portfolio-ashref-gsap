@@ -24,7 +24,7 @@ export const HeroIdentity = () => {
           onEnter: () =>
             gsap.to('body', { backgroundColor: '#171717', duration: 0.5 }),
           onLeave: () =>
-            gsap.to('body', { backgroundColor: '#ffffff', duration: 0.1 }),
+            gsap.to('body', { backgroundColor: '#fafafa', duration: 0.1 }),
           onLeaveBack: () =>
             gsap.to('body', { backgroundColor: '#fafafa', duration: 0.5 }),
         },
@@ -100,7 +100,7 @@ export const HeroIdentity = () => {
     <section
       id='identity'
       ref={wrapperRef}
-      className='relative h-screen w-full bg-neutral-900 text-white overflow-hidden z-20 perspective-container'
+      className='relative h-screen w-full bg-neutral-900 text-[#fafafa] overflow-hidden z-20 perspective-container'
     >
       <style>{`
         .perspective-container {
@@ -151,14 +151,14 @@ export const HeroIdentity = () => {
           <div className='relative z-0 leading-[0.8] flex justify-center items-center'>
             <span
               ref={scaleRef}
-              className='scale-word text-[25vw] font-black tracking-tighter text-white block origin-center'
+              className='scale-word text-[25vw] font-black tracking-tighter text-[#fafafa] block origin-center'
             >
               SCALE
             </span>
           </div>
 
           {/* Bottom Row */}
-          <div className='grid-item-aux mt-4 md:mt-0 md:absolute md:bottom-[20%] md:right-[20%] px-6 py-2 rounded-full bg-white text-black flex items-center gap-2 transform rotate-[-2deg]'>
+          <div className='grid-item-aux mt-4 md:mt-0 md:absolute md:bottom-[20%] md:right-[20%] px-6 py-2 rounded-full bg-[#fafafa] text-black flex items-center gap-2 transform rotate-[-2deg]'>
             <MousePointer2 className='w-4 h-4' />
             <span className='text-sm font-bold tracking-wide'>INTERACTIVE</span>
           </div>

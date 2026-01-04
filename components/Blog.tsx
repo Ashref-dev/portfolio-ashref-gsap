@@ -89,7 +89,7 @@ export const Blog: React.FC = () => {
   return (
     <section
       ref={containerRef}
-      className="py-32 bg-white px-6 relative z-20 border-t border-neutral-100"
+      className="py-32 bg-[#fafafa] px-6 relative z-20 border-t border-neutral-100"
     >
       <div className="max-w-7xl mx-auto">
         {/* Header: Minimalist & Architectural */}
@@ -158,7 +158,7 @@ export const Blog: React.FC = () => {
       {/* The "Artifact" Cursor: Square Aspect Ratio (1:1) */}
       <div
         ref={cursorRef}
-        className={`fixed top-0 left-0 size-64 pointer-events-none z-[100] overflow-hidden rounded-2xl shadow-2xl transition-all duration-500 ease-out ${
+        className={`fixed top-0 left-0 size-[30em] pointer-events-none z-[100] overflow-hidden rounded-2xl shadow-2xl transition-all duration-500 ease-out ${
           activeImage
             ? "opacity-100 scale-100 rotate-3"
             : "opacity-0 scale-50 rotate-0"
