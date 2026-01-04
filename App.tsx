@@ -30,35 +30,40 @@ export default function App() {
       {/* Global Header */}
       <Header />
 
-      {/* 1. Hero Manifesto (Clean Intro) */}
-      <HeroManifesto />
+      {/* Main Content Wrapper - Slides over the footer */}
+      <main className="relative z-10 bg-white shadow-2xl mb-[85vh]">
+        {/* 1. Hero Manifesto (Clean Intro) */}
+        <HeroManifesto />
 
-      {/* 2. Hero Identity (Dark Mode Transition) */}
-      <HeroIdentity />
+        {/* 2. Projects Gallery (Horizontal) */}
+        <Projects />
 
-      {/* 3. Process Ticker (Horizontal Story) */}
-      <ProcessTicker />
+        {/* 3. Hero Identity (Dark Mode Transition) */}
+        <HeroIdentity />
 
-      {/* 4. About Me (Bio, Stats, Tech) */}
-      <About />
+        {/* 4. Process Ticker (Horizontal Story) */}
+        <ProcessTicker />
 
-      {/* 5. Services (Grid) */}
-      <Services />
+        {/* 5. About Me (Bio, Stats, Tech) */}
+        <About />
 
-      {/* 6. Experience (Timeline) */}
-      <Experience />
+        {/* 6. Services (Grid) */}
+        <Services />
 
-      {/* 8. Projects Gallery (Horizontal) */}
-      <Projects />
+        {/* 7. Experience (Timeline) */}
+        <Experience />
 
-      {/* 9. Testimonials */}
-      <Testimonials />
+        {/* 8. Testimonials */}
+        <Testimonials />
 
-      {/* 10. Blog */}
-      <Blog />
+        {/* 9. Blog */}
+        <Blog />
+      </main>
 
-      {/* Global Footer */}
-      <Footer />
+      {/* Global Footer - Fixed at the bottom */}
+      <div className="fixed bottom-0 left-0 w-full h-[85vh] z-0">
+        <Footer />
+      </div>
     </div>
   );
 }

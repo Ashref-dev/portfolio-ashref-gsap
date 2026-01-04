@@ -125,13 +125,19 @@ export const Experience = () => {
       });
 
       // Cursor Follow Logic
+      gsap.set(cursorRef.current, { xPercent: -50, yPercent: -50 });
+      const xTo = gsap.quickTo(cursorRef.current, "x", {
+        duration: 0.35,
+        ease: "power2.out",
+      });
+      const yTo = gsap.quickTo(cursorRef.current, "y", {
+        duration: 0.35,
+        ease: "power2.out",
+      });
+
       const moveCursor = (e: MouseEvent) => {
-        gsap.to(cursorRef.current, {
-          x: e.clientX,
-          y: e.clientY,
-          duration: 0.6,
-          ease: "power3.out",
-        });
+        xTo(e.clientX);
+        yTo(e.clientY);
       };
 
       window.addEventListener("mousemove", moveCursor);
@@ -140,35 +146,21 @@ export const Experience = () => {
     return () => ctx.revert();
   }, []);
 
-  const handleMouseEnter = (image: string) => {
-    setActiveImage(image);
-    gsap.to(cursorRef.current, {
-      scale: 1,
-      opacity: 1,
-      duration: 0.4,
-      ease: "back.out(1.7)",
-    });
-  };
-
-  const handleMouseLeave = () => {
-    gsap.to(cursorRef.current, {
-      scale: 0,
-      opacity: 0,
-      duration: 0.3,
-      ease: "power2.in",
-    });
-  };
-
   return (
     <section
       ref={containerRef}
       className="relative py-32 bg-white px-6 overflow-hidden"
       id="experience"
+      onMouseLeave={() => setActiveImage(null)}
     >
       {/* Floating Cursor Image */}
       <div
         ref={cursorRef}
-        className="fixed top-0 left-0 w-64 h-48 pointer-events-none z-[100] opacity-0 scale-0 -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-xl shadow-2xl border-4 border-white"
+        className={`fixed top-0 left-0 w-[380px] h-[250px] pointer-events-none z-[100] overflow-hidden rounded-xl shadow-2xl border-4 border-white transition-all duration-500 ease-out ${
+          activeImage
+            ? "opacity-100 scale-100 rotate-3"
+            : "opacity-0 scale-50 rotate-0"
+        }`}
       >
         {activeImage && (
           <img
@@ -207,8 +199,8 @@ export const Experience = () => {
             <div
               key={i}
               className="exp-row group relative cursor-none"
-              onMouseEnter={() => handleMouseEnter(exp.image)}
-              onMouseLeave={handleMouseLeave}
+              onMouseEnter={() => setActiveImage(exp.image)}
+              onMouseLeave={() => setActiveImage(null)}
             >
               <div className="py-12 grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-start transition-colors duration-500 hover:bg-neutral-50/50 px-4 -mx-4 rounded-xl">
                 {/* Period (Left) */}

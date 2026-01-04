@@ -202,7 +202,7 @@ export const HeroManifesto = () => {
   return (
     <section
       ref={containerRef}
-      className='relative h-screen flex flex-col justify-between bg-[#fafafa] text-neutral-900 z-10 overflow-hidden'
+      className='relative h-screen flex flex-col justify-between bg-white text-neutral-900 z-10 overflow-hidden'
     >
       <canvas ref={canvasRef} className='fixed inset-0 pointer-events-none z-50' />
       
@@ -263,7 +263,7 @@ export const HeroManifesto = () => {
         <div className='mt-12 md:mt-16'>
           <button
             ref={targetRef}
-            onClick={() => document.getElementById('identity')?.scrollIntoView({ behavior: 'smooth' })}
+            onClick={() => document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' })}
             className='group relative px-8 py-4 bg-neutral-900 text-white rounded-full font-sans text-[10px] uppercase tracking-[0.3em] overflow-hidden transition-transform hover:scale-105 active:scale-95'
           >
             <span className='relative z-10'>Explore Work</span>
