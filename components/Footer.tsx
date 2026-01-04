@@ -2,7 +2,7 @@ export const Footer = () => {
   return (
     <footer className='h-[80vh] bg-white flex flex-col items-center justify-center z-0 relative px-4 border-t border-neutral-100'>
       <div className='text-center'>
-        <p className='text-neutral-400 mb-6 font-mono text-sm tracking-widest uppercase'>
+        <p className='text-neutral-400 mb-6 font-sans text-[10px] tracking-[0.3em] uppercase'>
           Let's Meet!
         </p>
         <a href='mailto:hi@ashref.tn' className='group relative inline-block'>
@@ -15,7 +15,7 @@ export const Footer = () => {
         </a>
       </div>
 
-      <div className='mt-20 flex flex-wrap justify-center gap-8 text-neutral-500 font-mono text-sm'>
+      <div className='mt-20 flex flex-wrap justify-center gap-8 text-neutral-500 font-sans text-[10px] tracking-[0.2em] uppercase'>
         <a
           href='https://www.linkedin.com/in/mohamedashrefbna/'
           target='_blank'
@@ -49,7 +49,7 @@ export const Footer = () => {
           LEETCODE
         </a>
         <a
-          href='/img/resume_ashref.pdf'
+          href='/assets/resume_ashref.pdf'
           target='_blank'
           rel='noopener noreferrer'
           className='hover:text-black transition-colors border-b border-neutral-300 pb-0.5'
@@ -58,7 +58,7 @@ export const Footer = () => {
         </a>
       </div>
 
-      <div className='absolute bottom-8 left-0 w-full text-center text-xs text-neutral-300'>
+      <div className='absolute bottom-8 left-0 w-full text-center text-[10px] font-sans tracking-widest text-neutral-300 uppercase'>
         &copy; {new Date().getFullYear()} Ashref. All Rights Reserved.
       </div>
     </footer>

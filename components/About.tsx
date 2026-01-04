@@ -1,12 +1,13 @@
 import { useLayoutEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Award, Zap } from 'lucide-react';
+import { cn } from '../utils';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export const About = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const statsRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -19,65 +20,119 @@ export const About = () => {
         }
       });
 
-      tl.from(".about-title", { y: 50, opacity: 0, duration: 1, ease: "power3.out" });
-      tl.from(".about-text", { y: 30, opacity: 0, duration: 1, stagger: 0.1, ease: "power3.out" }, "<0.2");
-      tl.from(".about-stat", { scale: 0.8, opacity: 0, duration: 0.6, stagger: 0.1, ease: "back.out(1.7)" }, "<0.4");
-      tl.from(".tech-pill", { y: 20, opacity: 0, duration: 0.5, stagger: 0.05, ease: "power2.out" }, "<0.4");
+      // 1. Title & Bio Reveal
+      tl.from(".about-reveal", {
+        y: 40,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.1,
+        ease: "power3.out"
+      });
+
+      // 2. Stats Line Draw & Reveal
+      tl.from(".stat-border", {
+        scaleX: 0,
+        duration: 1,
+        ease: "expo.out"
+      }, "-=0.5");
+      
+      tl.from(".stat-item", {
+        y: 20,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: "power2.out"
+      }, "-=0.8");
+
+      // 3. Tech Ticker Fade In
+      tl.from(".tech-ticker", {
+        opacity: 0,
+        duration: 1,
+        ease: "power2.inOut"
+      }, "-=0.5");
 
     }, containerRef);
     return () => ctx.revert();
   }, []);
 
-  const techs = ["Next.js", "React", "Unity", ".NET", "Azure", "TailwindCSS", "PostgreSQL", "Figma", "Docker", "Three.js"];
+  const stats = [
+    { value: "4x", label: "Microsoft Certified", color: "text-amber-600" },
+    { value: "20+", label: "Projects Delivered", color: "text-blue-600" },
+    { value: "5k+", label: "Cups of Coffee", color: "text-rose-600" },
+  ];
+
+  const techs = ["Python", "Go", "Next.js", "AWS", "Azure", "Docker", "PostgreSQL", "AI Agents", "Unity", "Three.js"];
 
   return (
-    <section ref={containerRef} className="py-24 md:py-32 bg-white px-6 border-b border-neutral-100">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-24">
+    <section ref={containerRef} className="relative py-24 bg-white px-6 border-b border-neutral-100 overflow-hidden" id="about">
+      <div className="max-w-7xl mx-auto">
         
-        {/* Left Col - Title */}
-        <div className="md:col-span-4">
-          <h2 className="about-title text-[clamp(3rem,6vw,5rem)] font-bold tracking-tighter leading-[0.9] text-neutral-900 mb-8">
-            Beyond<br/><span className="text-neutral-400 font-serif italic">The Code</span>
-          </h2>
-          <div className="flex flex-col gap-6">
-            <div className="about-stat p-6 bg-neutral-50 rounded-2xl border border-neutral-100">
-               <Award className="w-8 h-8 text-amber-500 mb-4" />
-               <div className="text-3xl font-bold text-neutral-900">4x</div>
-               <div className="text-sm font-mono text-neutral-500 uppercase tracking-wider">Microsoft Certified</div>
-            </div>
-            <div className="about-stat p-6 bg-neutral-50 rounded-2xl border border-neutral-100">
-               <Zap className="w-8 h-8 text-indigo-500 mb-4" />
-               <div className="text-3xl font-bold text-neutral-900">20+</div>
-               <div className="text-sm font-mono text-neutral-500 uppercase tracking-wider">Projects Shipped</div>
-            </div>
+        {/* Top Section: Compact Bio */}
+        <div className="flex flex-col md:flex-row gap-12 md:gap-24 items-start mb-20">
+          <div className="w-full md:w-1/3 shrink-0">
+            <h2 className="about-reveal text-[clamp(3rem,5vw,4rem)] font-bold tracking-tighter leading-[0.9] text-neutral-900">
+              About<br/>
+              <span className="font-serif italic font-light text-neutral-400 mt-1">Me.</span>
+            </h2>
+          </div>
+          
+          <div className="w-full md:w-2/3 pt-2">
+            <p className="about-reveal text-xl md:text-2xl font-light leading-relaxed text-neutral-800 max-w-2xl">
+              I'm <strong className="font-semibold text-black">Ashref</strong>. I bridge the gap between heavy backend logic and the human experience. From dynamically provisioning cloud containers to tuning AI agents for real-world reasoning, I care about the <span className="italic font-serif">entire</span> stack.
+            </p>
           </div>
         </div>
 
-        {/* Right Col - Bio & Tech */}
-        <div className="md:col-span-8 flex flex-col justify-center">
-          <div className="prose prose-lg prose-neutral max-w-none mb-12">
-            <h3 className="text-3xl font-bold text-neutral-900 mb-6">I build complex systems that feel simple.</h3>
-            <p className="about-text text-xl md:text-2xl font-light leading-relaxed text-neutral-800">
-              I'm <strong className="font-semibold text-black">Ashref</strong>. I'm a software engineer who cares about the whole product, from the database to the pixel. I've built cybersecurity agents that dynamically provision Kali Linux containers in the cloud, and document processing systems that handle real-world workloads.
-            </p>
-            <p className="about-text text-lg text-neutral-500 mt-6 leading-relaxed">
-              I use <strong className="font-medium text-neutral-900">Go</strong> for high-performance microservices, <strong className="font-medium text-neutral-900">AWS</strong> for scalable infrastructure, and <strong className="font-medium text-neutral-900">Next.js</strong> because I believe even complex internal tools should have a great user experience. I also have deep experience tuning AI agents using prompt engineering and A/B testing to ensure reliability. I bridge the gap between heavy backend logic and the person using it.
-            </p>
+        {/* Middle Section: Minimalist Stats Strip */}
+        <div ref={statsRef} className="relative mb-20">
+          {/* Top Border */}
+          <div className="stat-border absolute top-0 left-0 w-full h-px bg-neutral-100 origin-left" />
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-neutral-100">
+            {stats.map((stat, i) => (
+              <div key={i} className="stat-item group py-8 md:py-12 md:px-8 first:pl-0 transition-colors hover:bg-neutral-50/50">
+                <div className={cn("text-4xl md:text-5xl font-bold mb-2 tracking-tight transition-colors duration-300", stat.color)}>
+                  {stat.value}
+                </div>
+                <div className="font-sans text-xs uppercase tracking-[0.2em] text-neutral-400 group-hover:text-neutral-600 transition-colors">
+                  {stat.label}
+                </div>
+              </div>
+            ))}
           </div>
 
-          <div>
-             <h3 className="about-text font-mono text-sm text-neutral-400 uppercase tracking-widest mb-6">Technologies I Love</h3>
-             <div className="flex flex-wrap gap-3">
-               {techs.map((tech, i) => (
-                 <span key={i} className="tech-pill px-4 py-2 bg-neutral-100 text-neutral-700 rounded-full font-medium text-sm hover:bg-neutral-900 hover:text-white transition-colors cursor-default">
-                   {tech}
-                 </span>
-               ))}
-             </div>
+          {/* Bottom Border */}
+          <div className="stat-border absolute bottom-0 left-0 w-full h-px bg-neutral-100 origin-left" />
+        </div>
+
+        {/* Bottom Section: Tech Stack Ticker */}
+        <div className="tech-ticker overflow-hidden relative">
+          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-white to-transparent z-10" />
+          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-white to-transparent z-10" />
+          
+          <div className="flex whitespace-nowrap animate-ticker hover:[animation-play-state:paused]">
+            {[...techs, ...techs, ...techs].map((tech, i) => (
+              <div key={i} className="inline-flex items-center mx-6">
+                <span className="text-3xl md:text-4xl font-serif italic text-neutral-300 hover:text-neutral-900 transition-colors duration-300 cursor-default">
+                  {tech}
+                </span>
+                <span className="ml-12 w-1 h-1 rounded-full bg-neutral-200" />
+              </div>
+            ))}
           </div>
         </div>
 
       </div>
+
+      <style jsx>{`
+        @keyframes ticker {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-33.33%); }
+        }
+        .animate-ticker {
+          animation: ticker 40s linear infinite;
+        }
+      `}</style>
     </section>
   );
 };

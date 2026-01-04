@@ -19,7 +19,7 @@ export const Testimonials = () => {
   return (
     <section className="py-24 bg-neutral-900 text-white px-6">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-sm font-mono text-neutral-500 tracking-[0.5em] uppercase mb-16 text-center">Testimonials</h2>
+        <h2 className="text-[10px] font-sans text-neutral-500 tracking-[0.5em] uppercase mb-16 text-center">Testimonials</h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16">
           {testimonials.map((t, i) => (

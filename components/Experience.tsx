@@ -1,91 +1,250 @@
-import { Briefcase } from 'lucide-react';
+import { useRef, useLayoutEffect, useState } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const experiences = [
   {
     role: "Software Engineer",
     company: "Bookme OÜ",
-    period: "June 2024 - Present",
-    desc: "Developed full-stack Next.js solutions with advanced AI integration, enabling faster document processing using AWS and real-time analytics."
+    period: "2024 — Present",
+    desc: "Architecting full-stack Next.js solutions with advanced AI integration. Optimizing document processing pipelines via AWS and real-time analytics.",
+    tech: ["Next.js", "AWS", "AI Integration"],
+    image:
+      "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1000&auto=format&fit=crop",
   },
   {
     role: "Solutions Developer",
-    company: "Forvia (Tessan Group)",
-    period: "Jan 2024 - June 2024",
-    desc: "Developed industrial VR training modules using Unity Engine, achieving 90+ FPS. Engineered custom interactions increasing user engagement by 50%."
+    company: "Forvia",
+    period: "2024",
+    desc: "Engineered industrial VR training modules in Unity (90+ FPS). Designed custom interaction systems that boosted user engagement by 50%.",
+    tech: ["Unity", "C#", "VR"],
+    image:
+      "https://images.unsplash.com/photo-1478416272538-5f7e51dc5400?q=80&w=1000&auto=format&fit=crop",
   },
   {
     role: "Blazor Developer",
-    company: "Forvia (Tessan Group)",
-    period: "Dec 2023",
-    desc: "Architected high-performance .NET Blazor application, achieving 95% Lighthouse accessibility score and reducing page load time significantly."
+    company: "Forvia",
+    period: "2023",
+    desc: "Built high-performance .NET Blazor applications. Achieved 95% Lighthouse accessibility scores and significantly reduced load times.",
+    tech: [".NET", "Blazor", "Performance"],
+    image:
+      "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=1000&auto=format&fit=crop",
   },
   {
     role: "Full-stack Developer",
     company: "TSI",
-    period: "June 2023 - Sept 2023",
-    desc: "Developed QR-based inventory system, reducing login time for seasonal workers by 80% and built Angular-based management interface."
+    period: "2023",
+    desc: "Developed a QR-based inventory system that cut seasonal worker login times by 80%. Built a robust Angular management interface.",
+    tech: ["Angular", "QR Systems", "Inventory"],
+    image:
+      "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1000&auto=format&fit=crop",
   },
   {
     role: "Creative Developer",
     company: "Chilift",
-    period: "May 2023 - June 2023",
-    desc: "Developed high-converting landing page using React and Tailwind CSS, increasing conversion rate by 35%."
+    period: "2023",
+    desc: "Crafted a high-converting landing page using React/Tailwind. Improved conversion rates by 35% through performance optimization.",
+    tech: ["React", "Tailwind", "CRO"],
+    image:
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1000&auto=format&fit=crop",
   },
   {
-    role: "Co-Founder & Game Dev",
+    role: "Co-Founder & Dev",
     company: "RedSpear",
-    period: "Mar 2022 - June 2023",
-    desc: "Developed C# gameplay systems achieving 60 FPS. Implemented Python AI scripts automating development tasks."
+    period: "2022 — 2023",
+    desc: "Developed core C# gameplay systems (60 FPS). Implemented Python AI scripts to automate repetitive development tasks.",
+    tech: ["C#", "Python", "Game Dev"],
+    image:
+      "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1000&auto=format&fit=crop",
   },
   {
     role: "Web Developer",
     company: "AJico Group",
-    period: "Jan 2023 - May 2023",
-    desc: "Developed event website with 10K+ visitors. Implemented real-time communication features."
+    period: "2023",
+    desc: "Launched an event website serving 10K+ visitors. Implemented real-time communication features for live updates.",
+    tech: ["WebSockets", "Real-time", "Scale"],
+    image:
+      "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1000&auto=format&fit=crop",
   },
   {
-    role: "Junior Web Developer",
+    role: "Junior Developer",
     company: "CIN Group",
-    period: "Aug 2022 - Jan 2023",
-    desc: "Developed secure investment platform with 99.9% uptime and zero security incidents."
-  }
+    period: "2022 — 2023",
+    desc: "Maintained a secure investment platform with 99.9% uptime. Handled sensitive financial data with zero security incidents.",
+    tech: ["Security", "FinTech", "Uptime"],
+    image:
+      "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=1000&auto=format&fit=crop",
+  },
 ];
 
 export const Experience = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const cursorRef = useRef<HTMLDivElement>(null);
+  const [activeImage, setActiveImage] = useState<string | null>(null);
+
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      // Header Reveal
+      gsap.from(".exp-header-reveal", {
+        y: 50,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 80%",
+        },
+      });
+
+      // Line Draw
+      gsap.from(".exp-line", {
+        scaleX: 0,
+        transformOrigin: "left center",
+        duration: 1.5,
+        ease: "expo.out",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 70%",
+        },
+      });
+
+      // Row Reveal
+      gsap.from(".exp-row", {
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: ".exp-list",
+          start: "top 85%",
+        },
+      });
+
+      // Cursor Follow Logic
+      const moveCursor = (e: MouseEvent) => {
+        gsap.to(cursorRef.current, {
+          x: e.clientX,
+          y: e.clientY,
+          duration: 0.6,
+          ease: "power3.out",
+        });
+      };
+
+      window.addEventListener("mousemove", moveCursor);
+      return () => window.removeEventListener("mousemove", moveCursor);
+    }, containerRef);
+    return () => ctx.revert();
+  }, []);
+
+  const handleMouseEnter = (image: string) => {
+    setActiveImage(image);
+    gsap.to(cursorRef.current, {
+      scale: 1,
+      opacity: 1,
+      duration: 0.4,
+      ease: "back.out(1.7)",
+    });
+  };
+
+  const handleMouseLeave = () => {
+    gsap.to(cursorRef.current, {
+      scale: 0,
+      opacity: 0,
+      duration: 0.3,
+      ease: "power2.in",
+    });
+  };
+
   return (
-    <section className="py-24 bg-white px-6">
-      <div className="max-w-4xl mx-auto">
-        <div className="flex items-center gap-4 mb-12">
-          <div className="p-3 bg-neutral-100 rounded-full">
-            <Briefcase className="w-5 h-5 text-neutral-600" />
+    <section
+      ref={containerRef}
+      className="relative py-32 bg-white px-6 overflow-hidden"
+      id="experience"
+    >
+      {/* Floating Cursor Image */}
+      <div
+        ref={cursorRef}
+        className="fixed top-0 left-0 w-64 h-48 pointer-events-none z-[100] opacity-0 scale-0 -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-xl shadow-2xl border-4 border-white"
+      >
+        {activeImage && (
+          <img
+            src={activeImage}
+            alt="Experience Preview"
+            className="w-full h-full object-cover"
+          />
+        )}
+      </div>
+
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <div className="mb-24 flex flex-col md:flex-row md:items-end justify-between gap-8">
+          <div>
+            <h2 className="exp-header-reveal text-[clamp(3rem,6vw,5rem)] font-bold tracking-tighter leading-[0.9] text-neutral-900">
+              Career
+              <span className="pl-6 font-serif italic text-rose-600">
+                Trajectory.
+              </span>
+            </h2>
           </div>
-          <h2 className="text-2xl font-bold tracking-tight text-neutral-900">Work History</h2>
+          <div className="md:max-w-md mb-2">
+            <p className="exp-header-reveal text-lg text-neutral-500 font-light leading-relaxed">
+              A timeline of technical challenges, product launches, and
+              continuous engineering evolution.
+            </p>
+          </div>
         </div>
 
-        <div className="flex flex-col gap-8">
+        {/* Experience Grid */}
+        <div className="exp-list flex flex-col">
+          {/* Top Line */}
+          <div className="exp-line w-full h-px bg-neutral-200" />
+
           {experiences.map((exp, i) => (
-            <div 
-              key={i} 
-              className="group relative pl-8 md:pl-0"
+            <div
+              key={i}
+              className="exp-row group relative cursor-none"
+              onMouseEnter={() => handleMouseEnter(exp.image)}
+              onMouseLeave={handleMouseLeave}
             >
-              {/* Timeline Line (Desktop) */}
-              <div className="hidden md:block absolute left-[145px] top-2 bottom-0 w-px bg-neutral-100 group-last:hidden" />
-              <div className="hidden md:block absolute left-[141px] top-2 w-2 h-2 rounded-full bg-neutral-200 group-hover:bg-blue-600 transition-colors" />
+              <div className="py-12 grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-start transition-colors duration-500 hover:bg-neutral-50/50 px-4 -mx-4 rounded-xl">
+                {/* Period (Left) */}
+                <div className="md:col-span-3">
+                  <span className="font-mono text-xs uppercase tracking-widest text-neutral-400 group-hover:text-neutral-900 transition-colors duration-300">
+                    {exp.period}
+                  </span>
+                </div>
 
-              {/* Timeline Line (Mobile) */}
-              <div className="md:hidden absolute left-0 top-2 bottom-0 w-px bg-neutral-100 group-last:hidden" />
-              <div className="md:hidden absolute left-[-3.5px] top-2 w-2 h-2 rounded-full bg-neutral-200 group-hover:bg-blue-600 transition-colors" />
-
-              <div className="flex flex-col md:flex-row md:gap-12">
-                <span className="font-mono text-xs text-neutral-400 uppercase w-32 shrink-0 pt-1 mb-2 md:mb-0">{exp.period}</span>
-                
-                <div className="flex-grow">
-                  <h3 className="text-lg font-medium text-neutral-900 mb-1 group-hover:text-blue-600 transition-colors">
-                    {exp.role} <span className="text-neutral-400 font-normal">at {exp.company}</span>
+                {/* Role & Company (Middle) */}
+                <div className="md:col-span-4">
+                  <h3 className="text-2xl font-bold text-neutral-900 mb-1 group-hover:text-rose-600 transition-colors duration-300">
+                    {exp.role}
                   </h3>
-                  <p className="text-neutral-500 leading-relaxed text-sm max-w-xl">
+                  <p className="font-serif italic text-xl text-neutral-400 group-hover:text-neutral-600 transition-colors duration-300">
+                    {exp.company}
+                  </p>
+                </div>
+
+                {/* Description (Right) */}
+                <div className="md:col-span-5">
+                  <p className="text-neutral-500 font-light leading-relaxed mb-6 group-hover:text-neutral-700 transition-colors duration-300">
                     {exp.desc}
                   </p>
+
+                  {/* Tech Tags */}
+                  <div className="flex flex-wrap gap-2 opacity-60 group-hover:opacity-100 transition-opacity duration-300">
+                    {exp.tech.map((t, idx) => (
+                      <span
+                        key={idx}
+                        className="text-[10px] uppercase tracking-wider font-medium text-neutral-400 border border-neutral-200 px-2 py-1 rounded-md"
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>

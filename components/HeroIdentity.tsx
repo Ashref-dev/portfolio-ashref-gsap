@@ -17,8 +17,8 @@ export const HeroIdentity = () => {
         scrollTrigger: {
           trigger: wrapperRef.current,
           start: 'top top',
-          end: '+=350%',
-          scrub: 1,
+          end: '+=300%',
+          scrub: 1, // Smooth scrubbing for the fly-in
           pin: true,
           anticipatePin: 1,
           onEnter: () =>
@@ -30,50 +30,43 @@ export const HeroIdentity = () => {
         },
       });
 
-    
+      // 0. Initial Setup
+      gsap.set('.grid-item-text', { 
+        z: 1200, // Reduced distance for a more controlled feel
+        scale: 1.5, // Less extreme scale
+        opacity: 0, 
+        filter: 'blur(12px)' // Sharper initial blur
+      });
+      gsap.set('.grid-item-aux', { y: 20, opacity: 0 });
+      gsap.set(scaleRef.current, { scale: 0.9, opacity: 0, filter: 'blur(15px)' });
 
-      // 2. Shutters Open
-      tl.to(
-        '.shutter-top',
-        { yPercent: -100, duration: 1, ease: 'power2.inOut' },
-        '>-0.1'
-      );
-      tl.to(
-        '.shutter-bottom',
-        { yPercent: 100, duration: 1, ease: 'power2.inOut' },
-        '<'
-      );
+      // 1. Z-Space Injection (Organized Left-to-Right Stagger)
+      tl.to('.grid-item-text', {
+        z: 0,
+        scale: 1,
+        opacity: 1,
+        filter: 'blur(0px)',
+        stagger: 0.08, // Sequential left-to-right for organizational clarity
+        duration: 1.5,
+        ease: 'expo.out', // More professional, "snappy" easing
+      });
 
-      // 3. Content Reveal
-      tl.fromTo(
-        '.grid-content',
-        { opacity: 0, y: 50 },
-        { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' },
-        '-=0.5'
-      );
+      // 2. Aux Elements Fade In (Subtle)
+      tl.to('.grid-item-aux', {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        ease: 'power2.out',
+      }, '-=1');
 
-      tl.from(
-        '.grid-item-text:not(.scale-word)',
-        {
-          y: 100,
-          opacity: 0,
-          stagger: 0.05,
-          duration: 0.8,
-          ease: 'power3.out',
-        },
-        '<'
-      );
-
-      tl.from(
-        scaleRef.current,
-        {
-          y: 150,
-          opacity: 0,
-          duration: 1,
-          ease: 'power3.out',
-        },
-        '<0.1'
-      );
+      // 3. "SCALE" Word Appears (Precise focus)
+      tl.to(scaleRef.current, {
+        scale: 1,
+        opacity: 1,
+        filter: 'blur(0px)',
+        duration: 1,
+        ease: 'expo.out',
+      }, '-=0.8');
 
       // 4. THE TRANSITION
       // Fade out everything EXCEPT "SCALE"
@@ -81,15 +74,15 @@ export const HeroIdentity = () => {
         ['.grid-item-text:not(.scale-word)', '.grid-item-aux'],
         {
           opacity: 0,
-          y: -50,
-          duration: 0.5,
-          ease: 'power2.in',
+          z: -200, // Subtle retreat
+          filter: 'blur(8px)',
+          duration: 0.6,
+          ease: 'power2.inOut',
         },
-        '+=0.5'
+        '+=0.3'
       );
 
       // Massive expansion of "SCALE" to fill the screen with white
-      // Since the text color is white, expanding it 100x acts as a white reveal
       tl.to(
         scaleRef.current,
         {
@@ -105,16 +98,18 @@ export const HeroIdentity = () => {
 
   return (
     <section
+      id='identity'
       ref={wrapperRef}
-      className='relative h-screen w-full bg-neutral-900 text-white overflow-hidden z-20'
+      className='relative h-screen w-full bg-neutral-900 text-white overflow-hidden z-20 perspective-container'
     >
       <style>{`
-        @keyframes blink-solid {
-          0%, 49% { opacity: 1; }
-          50%, 100% { opacity: 0; }
+        .perspective-container {
+          perspective: 1000px;
+          perspective-origin: center center;
         }
-        .animate-blink-solid {
-          animation: blink-solid 0.6s infinite;
+        .grid-item-text {
+          will-change: transform, opacity, filter;
+          transform-style: preserve-3d;
         }
       `}</style>
       {/* Background Noise */}
@@ -129,25 +124,13 @@ export const HeroIdentity = () => {
         ref={contentRef}
         className='relative w-full h-full flex items-center justify-center'
       >
-        {/* Shutters */}
-        <div className='shutter-top absolute top-0 left-0 w-full h-1/2 bg-neutral-900 z-10 flex items-end justify-center border-b border-neutral-800' />
-        <div className='shutter-bottom absolute bottom-0 left-0 w-full h-1/2 top-1/2 bg-neutral-900 z-10 flex items-start justify-center border-t border-neutral-800' />
-
-        {/* Cursor */}
-        <div
-          ref={cursorRef}
-          className='absolute z-20 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2'
-        >
-          <div className='w-[2px] h-[60px] bg-white animate-blink-solid' />
-        </div>
-
         {/* Grid Content */}
         <div className='grid-content absolute inset-0 flex flex-col items-center justify-center w-full h-full p-4'>
           {/* Top Row */}
           <div className='flex flex-col md:flex-row items-center gap-4 md:gap-12 mb-2 md:mb-6'>
             <div className='grid-item-aux px-4 py-1.5 rounded-full border border-neutral-700 flex items-center gap-2 bg-neutral-800/50 backdrop-blur-sm'>
               <Code2 className='w-4 h-4 text-neutral-400' />
-              <span className='text-xs font-mono text-neutral-400 tracking-wider'>
+              <span className='text-[10px] font-sans text-neutral-400 tracking-[0.2em] uppercase'>
                 INIT_SYSTEM
               </span>
             </div>

@@ -16,10 +16,10 @@ interface BlogPostProps {
 const BlogPost: React.FC<BlogPostProps> = ({ Icon, title, category, description, iconColor, bgColor, link, delay }) => (
   <Reveal delay={delay} className="group h-full">
     <a href={link} target="_blank" rel="noopener noreferrer" className="block h-full">
-      <div className="bg-white rounded-[2rem] p-3 border border-neutral-100 shadow-sm hover:shadow-xl transition-all duration-300 h-full relative overflow-hidden">
+      <div className="bg-white rounded-2xl p-3 border border-neutral-100 shadow-sm hover:shadow-xl transition-all duration-300 h-full relative overflow-hidden">
         
         {/* Image/Icon Container */}
-        <div className="aspect-[4/3] bg-neutral-100 rounded-[1.5rem] overflow-hidden relative mb-4">
+        <div className="aspect-[4/3] bg-neutral-100 rounded-xl overflow-hidden relative mb-4">
           <div className={`absolute inset-0 ${bgColor} flex items-center justify-center ${iconColor} group-hover:scale-105 transition-transform duration-500`}>
             <Icon className="w-12 h-12" strokeWidth={1} />
           </div>
@@ -27,11 +27,10 @@ const BlogPost: React.FC<BlogPostProps> = ({ Icon, title, category, description,
 
         {/* Content */}
         <div className="px-3 pb-4">
-          <div className="flex gap-3 mb-3 text-xs font-semibold uppercase tracking-wider text-neutral-400">
+          <div className="flex gap-3 mb-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-neutral-400">
             <span>{category}</span>
           </div>
-          {/* Using Montserrat specifically for the blog titles as requested */}
-          <h3 className="text-xl font-bold font-[Montserrat] text-neutral-900 group-hover:text-rose-600 transition-colors line-clamp-2 mb-2 leading-tight">
+          <h3 className="text-xl font-bold font-sans text-neutral-900 group-hover:text-rose-600 transition-colors line-clamp-2 mb-2 leading-tight">
             {title}
           </h3>
           <p className="text-neutral-500 text-sm line-clamp-2 leading-relaxed">{description}</p>
@@ -48,7 +47,7 @@ export const Blog: React.FC = () => {
         <Reveal>
           <div className="flex justify-between items-end mb-12 px-2">
               <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-neutral-900">Latest <span className="font-serif italic text-neutral-500">Thoughts.</span></h2>
-              <a href="https://www.instagram.com/ashref.dev/" target="_blank" className="hidden md:flex items-center gap-2 text-sm font-semibold font-[Montserrat] hover:text-rose-600 transition-colors">
+              <a href="https://www.instagram.com/ashref.dev/" target="_blank" className="hidden md:flex items-center gap-2 text-[10px] font-semibold font-sans uppercase tracking-[0.2em] hover:text-rose-600 transition-colors">
                   View all posts <ArrowRight className="w-4 h-4" strokeWidth={1.5} />
               </a>
           </div>

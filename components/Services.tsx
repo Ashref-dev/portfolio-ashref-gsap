@@ -1,83 +1,154 @@
-import { useLayoutEffect, useRef } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Palette, Server, Cloud, Glasses } from 'lucide-react';
+import { useRef, useLayoutEffect } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import {
+  HoverSlider,
+  HoverSliderImage,
+  HoverSliderImageWrap,
+  TextStaggerHover,
+  useHoverSliderContext,
+} from "./ui/animated-slideshow";
+import { motion } from "motion/react";
+
+// Import images
+import cloudImg from "../assets/services/cloud.png";
+import backImg from "../assets/services/back.png";
+import frontImg from "../assets/services/front.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const services = [
   {
-    title: "SaaS Development",
-    desc: "Building end-to-end applications with Next.js, focusing on performance and real user needs.",
-    icon: Palette,
-    color: "text-rose-600",
-    bg: "group-hover:bg-rose-50"
+    id: "01",
+    title: "Cloud",
+    desc: "Resilient, auto-scaling infrastructure. I orchestrate ECS clusters, serverless functions, and multi-region deployments with Terraform.",
+    tags: ["AWS", "Azure", "Docker", "Terraform"],
+    image: cloudImg,
   },
   {
-    title: "Cloud & DevOps",
-    desc: "Setting up reliable AWS environments, Docker containers, and CI/CD pipelines to keep things running smoothly.",
-    icon: Cloud,
-    color: "text-blue-600",
-    bg: "group-hover:bg-blue-50"
+    id: "02",
+    title: "Backend",
+    desc: "High-performance microservices. I engineer clean logic and efficient data pipelines using Go and Python for systems that must scale.",
+    tags: ["Go", "Python", "PostgreSQL", "Redis"],
+    image: backImg,
   },
   {
-    title: "AI Integration",
-    desc: "Implementing LLMs (Anthropic/OpenAI) to build agents that can actually reason and automate tasks.",
-    icon: Glasses,
-    color: "text-purple-600",
-    bg: "group-hover:bg-purple-50"
+    id: "03",
+    title: "Frontend",
+    desc: "Interactive, accessible interfaces. I build pixel-perfect user journeys with Next.js that feel invisible and instantaneous.",
+    tags: ["Next.js", "React", "TypeScript", "GSAP"],
+    image: frontImg,
   },
-  {
-    title: "Microservices",
-    desc: "Writing efficient backend services in Go or Python to handle complex logic and routing.",
-    icon: Server,
-    color: "text-emerald-600",
-    bg: "group-hover:bg-emerald-50"
-  }
 ];
+
+const ServiceDescription = () => {
+  const { activeSlide } = useHoverSliderContext();
+  const activeService = services[activeSlide];
+
+  return (
+    <motion.div
+      key={activeSlide}
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
+      className="mt-8 pointer-events-none"
+    >
+      <div className="flex flex-wrap gap-2 mb-4">
+        {activeService.tags.map((tag, i) => (
+          <span
+            key={i}
+            className="text-[10px] uppercase tracking-widest font-semibold text-blue-600 border border-blue-100 bg-blue-50/50 px-2 py-1 rounded"
+          >
+            {tag}
+          </span>
+        ))}
+      </div>
+      <p className="text-neutral-500 font-light leading-relaxed text-base md:text-lg max-w-md">
+        {activeService.desc}
+      </p>
+    </motion.div>
+  );
+};
 
 export const Services = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.from(".service-card", {
-        y: 100,
+      gsap.from(".service-header-reveal", {
+        y: 50,
         opacity: 0,
-        duration: 0.8,
+        duration: 1,
         stagger: 0.1,
-        ease: "power2.out",
+        ease: "power3.out",
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top 80%",
-        }
+        },
       });
     }, containerRef);
     return () => ctx.revert();
   }, []);
 
   return (
-    <section ref={containerRef} className="py-24 bg-neutral-50 px-6">
+    <section
+      ref={containerRef}
+      className="relative py-32 bg-white px-6"
+      id="services"
+    >
       <div className="max-w-7xl mx-auto">
-        <div className="mb-16">
-           <h2 className="text-sm font-mono text-neutral-400 tracking-[0.5em] uppercase mb-4">What I Do</h2>
-           <h3 className="text-4xl md:text-5xl font-bold text-neutral-900 tracking-tight">Solving problems with <br/> <span className="font-serif italic text-neutral-500">elegant solutions.</span></h3>
+        {/* Header */}
+        <div className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-8">
+          <h2 className="service-header-reveal text-[clamp(3rem,6vw,5rem)] font-bold tracking-tighter leading-[0.9] text-neutral-900">
+            Technical
+            <span className="pl-6 font-serif italic text-blue-600">
+              Expertise.
+            </span>
+          </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {services.map((s, i) => (
-            <div key={i} className={`service-card group p-8 md:p-12 bg-white rounded-3xl border border-neutral-200 transition-colors duration-500 ${s.bg}`}>
-               <div className="mb-8 flex items-start justify-between">
-                 <div className={`p-4 rounded-2xl bg-neutral-50 ${s.color} transition-colors duration-500 group-hover:bg-white`}>
-                   <s.icon className="w-8 h-8" />
-                 </div>
-                 <span className="font-mono text-xs text-neutral-300 group-hover:text-neutral-500">0{i+1}</span>
-               </div>
-               <h4 className="text-2xl font-bold text-neutral-900 mb-4">{s.title}</h4>
-               <p className="text-neutral-500 leading-relaxed max-w-sm">{s.desc}</p>
+        {/* Hover Slider Component */}
+        <HoverSlider className="w-full">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-start">
+            {/* Left Column: List of Titles */}
+            <div className="flex flex-col space-y-6 md:space-y-10 justify-center py-12">
+              {services.map((service, index) => (
+                <div key={service.id} className="group cursor-pointer">
+                  <span className="block text-xs font-mono text-neutral-400 mb-2 tracking-widest group-hover:text-amber-600 transition-colors">
+                    {service.id}
+                  </span>
+                  <TextStaggerHover
+                    index={index}
+                    className="text-5xl md:text-8xl font-bold uppercase tracking-tighter text-neutral-900"
+                    text={service.title}
+                  />
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+
+            {/* Right Column: Image + Description */}
+            <div className="flex flex-col">
+              <div className="relative aspect-[4/3] w-full">
+                <HoverSliderImageWrap className="rounded-2xl overflow-hidden bg-neutral-100 w-full h-full">
+                  {services.map((service, index) => (
+                    <HoverSliderImage
+                      key={service.id}
+                      index={index}
+                      imageUrl={service.image}
+                      src={service.image}
+                      alt={service.title}
+                      className="w-full h-full object-contain p-12 bg-neutral-50"
+                      loading="eager"
+                    />
+                  ))}
+                </HoverSliderImageWrap>
+              </div>
+
+              {/* Description Area moved here */}
+              <ServiceDescription />
+            </div>
+          </div>
+        </HoverSlider>
       </div>
     </section>
   );

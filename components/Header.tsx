@@ -4,7 +4,7 @@ import { gsap } from 'gsap';
 const NavLink = ({ children, href }: { children?: React.ReactNode; href: string }) => (
   <a 
     href={href}
-    className="nav-item relative font-mono text-sm uppercase tracking-widest text-neutral-300 hover:text-white transition-colors duration-300 group"
+    className="nav-item relative font-sans text-[10px] uppercase tracking-[0.2em] text-neutral-300 hover:text-white transition-colors duration-300 group"
   >
     {children}
     <span className="absolute -bottom-1 left-0 w-0 h-px bg-white transition-all duration-300 group-hover:w-full" />
@@ -30,18 +30,26 @@ export const Header = () => {
     <header ref={headerRef} className="fixed top-0 left-0 w-full z-50 flex items-center justify-between px-6 py-8 md:px-12 md:py-10 pointer-events-none mix-blend-difference">
       <div className="nav-item pointer-events-auto">
         <h1 className="font-serif text-4xl md:text-5xl font-bold tracking-tight text-white">
-          Ashref<span className="text-rose-500">.</span>
+          Ashref<span className="text-rose-600">.</span>
         </h1>
-        <p className="text-xs font-mono text-neutral-300 mt-1 tracking-widest uppercase hidden md:block">
+        <p className="text-[10px] font-sans text-neutral-300 mt-1 tracking-[0.3em] uppercase hidden md:block">
           Software Engineer
         </p>
       </div>
 
       <nav className="flex items-center gap-6 md:gap-12 pointer-events-auto">
         <div className="hidden md:flex gap-8">
-          <NavLink href="#portfolio">Work</NavLink>
+          <NavLink href="#work">Work</NavLink>
           <NavLink href="#about">About</NavLink>
-          <NavLink href="#contact">Contact</NavLink>
+          <a 
+            href="/assets/resume_ashref.pdf" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="nav-item relative font-sans text-[10px] uppercase tracking-[0.2em] text-neutral-300 hover:text-white transition-colors duration-300 group"
+          >
+            Resume
+            <span className="absolute -bottom-1 left-0 w-0 h-px bg-white transition-all duration-300 group-hover:w-full" />
+          </a>
         </div>
         <a 
           href="mailto:hi@ashref.tn"
