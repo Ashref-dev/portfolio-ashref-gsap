@@ -54,7 +54,7 @@ export const HeroManifesto = () => {
       gsap.to(arrowState, {
         alpha: 1,
         duration: 2,
-        delay: 2,
+        delay: 5,
         ease: "power2.inOut",
       });
 
@@ -242,7 +242,7 @@ export const HeroManifesto = () => {
               <Word>complex</Word>
               <HoverPill
                 text="Problems"
-                imageUrl="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?q=80&w=800&auto=format&fit=crop"
+                imageUrl="https://images.pexels.com/photos/3715428/pexels-photo-3715428.jpeg"
                 colorClass="text-rose-600"
                 bgClass="bg-rose-100"
                 className="manifesto-element align-middle mx-3"
@@ -255,7 +255,7 @@ export const HeroManifesto = () => {
               <Word>simple</Word>
               <HoverPill
                 text="Systems"
-                imageUrl="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop"
+                imageUrl="https://images.pexels.com/photos/18069816/pexels-photo-18069816.png"
                 colorClass="text-amber-600"
                 bgClass="bg-amber-100"
                 className="manifesto-element align-middle mx-3"
@@ -268,7 +268,7 @@ export const HeroManifesto = () => {
               <Word>solid</Word>
               <HoverPill
                 text="Infrastructure."
-                imageUrl="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800&auto=format&fit=crop"
+                imageUrl="https://images.pexels.com/photos/633625/pexels-photo-633625.jpeg"
                 colorClass="text-blue-600"
                 bgClass="bg-blue-100"
                 className="manifesto-element align-middle mx-3"

@@ -10,10 +10,10 @@ import {
 } from "./ui/animated-slideshow";
 import { motion } from "motion/react";
 
-// Import images
-import cloudImg from "../assets/services/cloud.png";
-import backImg from "../assets/services/back.png";
-import frontImg from "../assets/services/front.png";
+// Asset paths
+const cloudImg = "/assets/services/cloud.png";
+const backImg = "/assets/services/back.png";
+const frontImg = "/assets/services/front.png";
 
 gsap.registerPlugin(ScrollTrigger);
 

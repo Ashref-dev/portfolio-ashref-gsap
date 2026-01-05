@@ -28,7 +28,7 @@ export const Footer = () => {
 
       const handleMouseMove = (e: MouseEvent) => {
         const { clientX, clientY } = e;
-        const rect = containerRef.current?.getBoundingClientRect();
+        const rect = containerRef.current?.getBoundingClientRect(); 
         if (!rect) return;
 
         const x = clientX - (rect.left + rect.width / 2);

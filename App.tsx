@@ -1,3 +1,10 @@
+import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ReactLenis, useLenis } from "lenis/react";
+// @ts-ignore
+import "lenis/dist/lenis.css";
+
 import { Header } from "./components/Header";
 import { HeroManifesto } from "./components/HeroManifesto";
 import { HeroIdentity } from "./components/HeroIdentity";
@@ -10,60 +17,107 @@ import { Testimonials } from "./components/Testimonials";
 import { Blog } from "./components/Blog";
 import { Footer } from "./components/Footer";
 
+gsap.registerPlugin(ScrollTrigger);
+
+function LenisSync() {
+  useLenis(() => {
+    ScrollTrigger.update();
+  });
+  return null;
+}
+
 export default function App() {
+  const lenisRef = useRef<any>(null);
+
+  useEffect(() => {
+    function update(time: number) {
+      lenisRef.current?.lenis?.raf(time * 1000);
+    }
+
+    gsap.ticker.add(update);
+    gsap.ticker.lagSmoothing(0);
+
+    return () => {
+      gsap.ticker.remove(update);
+    };
+  }, []);
+
   return (
-    <div className="bg-neutral-900 min-h-screen">
-      <style>{`
-        :root {
-          --font-serif: 'Instrument Serif', serif;
-          --font-sans: 'Inter', sans-serif;
-        }
+    <ReactLenis root ref={lenisRef} options={{ autoRaf: false, anchors: true }}>
+      <LenisSync />
+      <div className="bg-neutral-900 min-h-screen">
+        <style>{`
+          :root {
+            --font-serif: 'Instrument Serif', serif;
+            --font-sans: 'Inter', sans-serif;
+          }
 
-        .font-serif { font-family: var(--font-serif); }
-        .font-sans { font-family: var(--font-sans); }
-        
-        html {
-           scroll-behavior: auto !important; 
-        }
-      `}</style>
+          .font-serif { font-family: var(--font-serif); }
+          .font-sans { font-family: var(--font-sans); }
+          
+          html.lenis {
+            height: auto;
+          }
 
-      {/* Global Header */}
-      <Header />
+          .lenis.lenis-smooth {
+            scroll-behavior: auto !important;
+          }
 
-      {/* Main Content Wrapper - Slides over the footer */}
-      <main className="relative z-10 bg-[#fafafa] shadow-2xl mb-[85vh]">
-        {/* 1. Hero Manifesto (Clean Intro) */}
-        <HeroManifesto />
+          .lenis.lenis-smooth [data-lenis-prevent] {
+            overscroll-behavior: contain;
+          }
 
-        {/* 2. Projects Gallery (Horizontal) */}
-        <Projects />
+          .lenis.lenis-stopped {
+            overflow: hidden;
+          }
 
-        {/* 3. Hero Identity (Dark Mode Transition) */}
-        <HeroIdentity />
+          .lenis.lenis-scrolling iframe {
+            pointer-events: none;
+          }
 
-        {/* 4. Process Ticker (Horizontal Story) */}
-        <ProcessTicker />
+          body {
+            overscroll-behavior: none;
+          }
+        `}</style>
 
-        {/* 5. About Me (Bio, Stats, Tech) */}
-        <About />
+        {/* Global Header */}
+        <Header />
 
-        {/* 6. Services (Grid) */}
-        <Services />
+        {/* Main Content Wrapper - Slides over the footer */}
+        <main className="relative z-10 bg-[#fafafa] shadow-2xl mb-[85vh]">
+          {/* 1. Hero Manifesto (Clean Intro) */}
+          <HeroManifesto />
 
-        {/* 7. Experience (Timeline) */}
-        <Experience />
+          {/* 2. Projects Gallery (Horizontal) */}
+          <Projects />
 
-        {/* 8. Testimonials */}
-        <Testimonials />
+          {/* 3. Hero Identity (Dark Mode Transition) */}
+          <HeroIdentity />
 
-        {/* 9. Blog */}
-        <Blog />
-      </main>
+          {/* 4. Process Ticker (Horizontal Story) */}
+          <ProcessTicker />
 
-      {/* Global Footer - Fixed at the bottom */}
-      <div className="fixed bottom-0 left-0 w-full h-[85vh] z-0">
-        <Footer />
+          {/* 5. About Me (Bio, Stats, Tech) */}
+          <About />
+
+          {/* 6. Services (Grid) */}
+          <Services />
+
+          {/* 7. Experience (Timeline) */}
+          <Experience />
+
+          {/* 8. Testimonials */}
+          <Testimonials />
+
+          {/* 9. Blog */}
+          <Blog />
+        </main>
+
+        {/* Global Footer - Fixed at the bottom */}
+        <div className="fixed bottom-0 left-0 w-full h-[85vh] z-0">
+          <Footer />
+        </div>
       </div>
-    </div>
+    </ReactLenis>
   );
 }
